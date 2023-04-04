@@ -9,21 +9,23 @@ class UserProfile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyanAccent,
-        title: const Center(child: Text('Settings', textAlign: TextAlign.center,)),
+        title: const Center(
+            child: Text(
+          'Settings',
+          textAlign: TextAlign.center,
+        )),
       ),
       body: Container(
         width: double.infinity,
-        padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+        color: Colors.grey[350],
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
-            _AvatarWidget(),
-            SizedBox(height: 10,),
-            _UserName(),
-             SizedBox(height: 5,),
-            _UserPhone(),
-             SizedBox(height: 5,),
-            _UserNickName()
+            _UserInfo(),
+            SizedBox(
+              height: 20,
+            ),
+            _MenuBlock(),
           ],
         ),
       ),
@@ -31,30 +33,85 @@ class UserProfile extends StatelessWidget {
   }
 }
 
-class _UserNickName extends StatelessWidget {
-  const _UserNickName();
+class _UserInfo extends StatelessWidget {
+  const _UserInfo();
 
   @override
   Widget build(BuildContext context) {
-    return const Text('@Sidi', style: TextStyle(color: Colors.blue),);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: const [
+          _AvatarWidget(),
+          SizedBox(
+            height: 10,
+          ),
+          _UserName(),
+          SizedBox(
+            height: 5,
+          ),
+          _UserPhone(),
+          SizedBox(
+            height: 5,
+          ),
+          _UserNickName()
+        ],
+      ),
+    );
   }
 }
 
-class _UserPhone extends StatelessWidget {
-  const _UserPhone();
+class _MenuBlock extends StatelessWidget {
+  const _MenuBlock();
 
   @override
   Widget build(BuildContext context) {
-    return const Text('+38-093-777-77-33');
+    return Container(
+      width: double.infinity,
+      color: Colors.white,
+      child: Column(
+        children: const [
+          _RowWidget()
+        ],
+      ),
+    );
   }
 }
 
-class _UserName extends StatelessWidget {
-  const _UserName();
+class _RowWidget extends StatelessWidget {
+  const _RowWidget();
 
   @override
   Widget build(BuildContext context) {
-    return const Text('Izotova Yeva', style: TextStyle(fontSize: 20, letterSpacing: 5, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 245, 67, 127)),);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: Row(
+        children: const [
+          Icon(
+            Icons.favorite,
+            size: 30,
+            color: Color.fromARGB(255, 96, 63, 241),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Expanded(
+              child: Text('Favorite',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 96, 63, 241),
+                  ))),
+          Icon(
+            Icons.chevron_right,
+            size: 30,
+            color: Color.fromARGB(255, 96, 63, 241),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -69,6 +126,43 @@ class _AvatarWidget extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       color: Colors.cyan,
       child: const Placeholder(),
+    );
+  }
+}
+
+class _UserName extends StatelessWidget {
+  const _UserName();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'Izotova Yeva',
+      style: TextStyle(
+          fontSize: 20,
+          letterSpacing: 5,
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 245, 67, 127)),
+    );
+  }
+}
+
+class _UserPhone extends StatelessWidget {
+  const _UserPhone();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text('+38-093-777-77-33');
+  }
+}
+
+class _UserNickName extends StatelessWidget {
+  const _UserNickName();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      '@Sidi',
+      style: TextStyle(color: Colors.blue),
     );
   }
 }
