@@ -69,45 +69,66 @@ class _MenuBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: Colors.white,
-      child: Column(
-        children: const [
-          _RowWidget()
-        ],
-      ),
+    return Column(
+      children: const [
+        _RowWidget(myIcon: Icons.favorite, text: 'Favorite',),
+        _RowWidget(myIcon: Icons.computer, text: 'Document',),
+        _RowWidget(myIcon: Icons.house_sharp, text: 'House',)
+      ],
     );
   }
 }
 
 class _RowWidget extends StatelessWidget {
-  const _RowWidget();
+  final IconData myIcon;
+  final String text;
+  const _RowWidget({
+    Key? key, required this.myIcon, required this.text,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      margin: const EdgeInsets.only(bottom: 3),
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(10),
+        topRight: Radius.circular(10),
+        bottomLeft: Radius.circular(10),
+        bottomRight: Radius.circular(10)
+    ),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 5,
+        blurRadius: 7,
+        offset: Offset(0, 3), // changes position of shadow
+      ),
+        ]
+      ),
       child: Row(
-        children: const [
+        children: [
           Icon(
-            Icons.favorite,
+            myIcon,
             size: 30,
-            color: Color.fromARGB(255, 96, 63, 241),
+            color: Color.fromARGB(255, 236, 80, 176),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Expanded(
-              child: Text('Favorite',
-                  style: TextStyle(
+              child: Text(text,
+                  style: const TextStyle(
                     fontSize: 20,
-                    color: Color.fromARGB(255, 96, 63, 241),
+                    color: Color.fromARGB(255, 236, 80, 176),
                   ))),
-          Icon(
+          const Icon(
             Icons.chevron_right,
             size: 30,
-            color: Color.fromARGB(255, 96, 63, 241),
+            color: Color.fromARGB(255, 236, 80, 176),
           ),
         ],
       ),
