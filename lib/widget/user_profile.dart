@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatelessWidget {
-  const UserProfile({super.key});
+  List <MenuRowData> firstMenuRow = [
+    MenuRowData(Icons.favorite, 'Favorite'),
+    MenuRowData(Icons.facebook_sharp, 'Facebook'),
+    MenuRowData(Icons.house_sharp, 'House')
+  ];
+  List <MenuRowData> secondMenuRow = [
+    MenuRowData(Icons.notifications, 'Notification'),
+    MenuRowData(Icons.privacy_tip, 'Privacy'),
+    MenuRowData(Icons.apple, 'Apple')
+  ];
+  UserProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +30,16 @@ class UserProfile extends StatelessWidget {
         color: Colors.grey[350],
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children:  [
             _UserInfo(),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            _MenuBlock(),
+            _MenuBlock(menuRow: firstMenuRow),
+             const SizedBox(
+              height: 20,
+            ),
+           _MenuBlock(menuRow: secondMenuRow),
           ],
         ),
       ),
@@ -34,7 +48,7 @@ class UserProfile extends StatelessWidget {
 }
 
 class _UserInfo extends StatelessWidget {
-  const _UserInfo();
+   _UserInfo();
 
   @override
   Widget build(BuildContext context) {
@@ -64,26 +78,33 @@ class _UserInfo extends StatelessWidget {
   }
 }
 
+class MenuRowData {
+  final IconData myIcon;
+  final String text;
+
+  MenuRowData(this.myIcon, this.text);
+}
+
 class _MenuBlock extends StatelessWidget {
-  const _MenuBlock();
+ final List <MenuRowData> menuRow;
+  const _MenuBlock({
+    Key? key,
+    required this.menuRow,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        _RowWidget(myIcon: Icons.favorite, text: 'Favorite',),
-        _RowWidget(myIcon: Icons.computer, text: 'Document',),
-        _RowWidget(myIcon: Icons.house_sharp, text: 'House',)
-      ],
+      children: menuRow.map((data) => _RowWidget(data: data)).toList()
     );
   }
 }
 
 class _RowWidget extends StatelessWidget {
-  final IconData myIcon;
-  final String text;
-  const _RowWidget({
-    Key? key, required this.myIcon, required this.text,
+  final MenuRowData data;
+   _RowWidget({
+    Key? key,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -93,26 +114,20 @@ class _RowWidget extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(10),
-        topRight: Radius.circular(10),
-        bottomLeft: Radius.circular(10),
-        bottomRight: Radius.circular(10)
-    ),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-        color: Colors.grey.withOpacity(0.5),
-        spreadRadius: 5,
-        blurRadius: 7,
-        offset: Offset(0, 3), // changes position of shadow
-      ),
-        ]
-      ),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ]),
       child: Row(
         children: [
           Icon(
-            myIcon,
+            data.myIcon,
             size: 30,
             color: Color.fromARGB(255, 236, 80, 176),
           ),
@@ -120,7 +135,7 @@ class _RowWidget extends StatelessWidget {
             width: 10,
           ),
           Expanded(
-              child: Text(text,
+              child: Text(data.text,
                   style: const TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(255, 236, 80, 176),
