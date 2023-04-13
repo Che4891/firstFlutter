@@ -31,18 +31,29 @@ class MyTestLayout extends StatelessWidget {
                 height: 200,
                 color: Colors.blue[200],
                 child: Column(children: [
-                   const FittedBox( // уменьшает потомков так чтоб они помещались в него (например текст без переноса)
-                    child: Text('Some Text i can use and use and use')),
+                  const FittedBox(
+                      // уменьшает потомков так чтоб они помещались в него (например текст без переноса)
+                      child: Text('Some Text i can use and use and use')),
                   Container(
                     color: Colors.grey,
                     width: 200,
                     height: 400,
                     child: Row(
                       children: [
-                        Expanded(child: Text('This is test text'),
-                        ), Container(
-                          child: Text('Thi'),
-                        )
+                        // Flexible(child: child) - Агалог Expanded
+                        Expanded( // Занимает все свободное место
+                        flex: 1, // определяет прострагство что занимает контейгер
+                          child: Container(
+                            color: Colors.indigoAccent,
+                            child:
+                          const Text('This is test text', style: TextStyle(fontSize: 15, decoration: TextDecoration.none, color: Colors.white))),
+                        ),
+                        Expanded( // Если их два то занимает по половине
+                        flex: 2,
+                          child: Container(
+                            color: Colors.blueGrey,
+                            child: const Text('This is test text', style: TextStyle(fontSize: 15, decoration: TextDecoration.none, color: Colors.white)))
+                          ),
                       ],
                     ),
                   ),
