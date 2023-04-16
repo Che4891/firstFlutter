@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_777/widget/test_CustomSingleChildLayout.dart';
 import 'package:flutter_application_777/widget/test_layout.dart';
 import 'package:flutter_application_777/widget/test_widget.dart';
 import 'package:flutter_application_777/widget/user_profile.dart';
@@ -10,8 +11,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return MaterialApp(
-      home: MyTestLayout(),
-      // home: City(),  // test widget
+      home: MyCustomSingleChild(),
+      // home: MyTestLayout(), // test how works layout
+      // home: City(),  // test how works array
       // home: UserProfile(),
     );
   }
