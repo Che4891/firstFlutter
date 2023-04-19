@@ -4,12 +4,19 @@ class UserProfile extends StatelessWidget {
   List <MenuRowData> firstMenuRow = [
     MenuRowData(Icons.favorite, 'Favorite'),
     MenuRowData(Icons.facebook_sharp, 'Facebook'),
-    MenuRowData(Icons.house_sharp, 'House')
+    MenuRowData(Icons.house_sharp, 'House'),
+    MenuRowData(Icons.contact_page, 'Contact')
   ];
   List <MenuRowData> secondMenuRow = [
     MenuRowData(Icons.notifications, 'Notification'),
     MenuRowData(Icons.privacy_tip, 'Privacy'),
-    MenuRowData(Icons.apple, 'Apple')
+    MenuRowData(Icons.apple, 'Apple'),
+    MenuRowData(Icons.android, 'Android')
+  ];
+   List <MenuRowData> thirdMenuRow = [
+    MenuRowData(Icons.image, 'Icon'),
+    MenuRowData(Icons.insert_emoticon_sharp, 'Imogen'),
+    MenuRowData(Icons.sticky_note_2, 'Stickers')
   ];
   UserProfile({super.key});
 
@@ -25,23 +32,43 @@ class UserProfile extends StatelessWidget {
           textAlign: TextAlign.center,
         )),
       ),
-      body: Container(
-        width: double.infinity,
-        color: Colors.grey[350],
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children:  [
-            _UserInfo(),
-            const SizedBox(
-              height: 20,
+      body: Stack(
+        children: [
+           Container(
+          width: double.infinity,
+          color: Colors.grey[350],
+          
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children:  [
+                _UserInfo(),
+                const SizedBox(
+                  height: 20,
+                ),
+                _MenuBlock(menuRow: firstMenuRow),
+                 const SizedBox(
+                  height: 20,
+                ),
+               _MenuBlock(menuRow: secondMenuRow),
+                const SizedBox(
+                  height: 20,
+                ),
+               _MenuBlock(menuRow: thirdMenuRow),
+              ],
             ),
-            _MenuBlock(menuRow: firstMenuRow),
-             const SizedBox(
-              height: 20,
-            ),
-           _MenuBlock(menuRow: secondMenuRow),
-          ],
+          ),
         ),
+        Positioned(
+          right: 20,
+          top: 20,
+          child: Row(
+            children: [
+              Icon(Icons.edit, color: Colors.blue[700], size: 19,),
+              Text('Edit', style: TextStyle( color: Colors.blue[700], fontSize: 20, fontWeight: FontWeight.bold),)
+            ],
+          ))
+        ]
       ),
     );
   }
