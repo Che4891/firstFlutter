@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 // ШАГ 1:  Это технический класс чтоб сделать массив обектов потом TechnicalClass - сделан обектом что хранит строки. которые мы потом заполним
 class TechnicalClass {
@@ -17,16 +16,16 @@ class TechnicalClass {
 
 class City extends StatelessWidget {
   City({super.key});
-  //ШАГ 2: Cоздаем массив из обектов (ШАГ 1) и задаем значение строкам
+
+  @override
+  Widget build(BuildContext context) {
+      //ШАГ 2: Cоздаем массив из обектов (ШАГ 1) и задаем значение строкам
   List textArray = [
     TechnicalClass(name: "Anton", city: 'Lviv', icon: Icons.face_outlined),
     TechnicalClass(name: "Eva", city: 'Lviv', icon: Icons.face_2_sharp),
     TechnicalClass(name: "Sargyk", city: 'Lviv', icon: Icons.masks_outlined),
     TechnicalClass(name: "Inna", city: 'Kryvchytsi', icon: Icons.face_3_sharp),
   ];
-
-  @override
-  Widget build(BuildContext context) {
     // ШАГ 3: создаем массив виджетов dataArray в который складываем textArray (ШАГ 2)
     List<Widget> dataArray =
         textArray.map((item) => TextRow(data: item)).toList();
